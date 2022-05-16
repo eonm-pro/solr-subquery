@@ -1,3 +1,5 @@
+mod bindings;
+
 mod errors;
 pub use errors::SolrSubqueryError;
 

@@ -10,8 +10,10 @@ pub enum SolrSubqueryError {
     /// Request has multiple `q` parameters
     MultipleQQueryParameters,
     //// Requests have different hosts
-    DifferentHosts,
-    //// Requests have different paths
+    DifferentsHosts(Option<String>, Option<String>),
+    /// Requests have different ports
+    DifferentsPorts(Option<u16>, Option<u16>),
+    /// Requests have different paths
     DifferentsPaths,
 }
 
@@ -25,7 +27,16 @@ impl std::fmt::Display for SolrSubqueryError {
             SolrSubqueryError::MultipleQQueryParameters => {
                 write!(f, "Request has multiple `q` query parameters")
             }
-            SolrSubqueryError::DifferentHosts => write!(f, "Requests have different hosts"),
+            SolrSubqueryError::DifferentsHosts(self_host, other_host) => write!(
+                f,
+                "Requests have different hosts [{:?}, {:?}]",
+                self_host, other_host
+            ),
+            SolrSubqueryError::DifferentsPorts(self_port, other_port) => write!(
+                f,
+                "Requests have different ports [{:?}, {:?}]",
+                self_port, other_port
+            ),
             SolrSubqueryError::DifferentsPaths => write!(f, "Requests have different paths"),
         }
     }

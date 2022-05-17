@@ -39,6 +39,8 @@ jobs:
         with:
           python-version: '3.x'
           architecture: 'x64'
+      - name: Install maturin
+        run: pip install maturin
       - name: Build
         run: maturin build
       - name: Release

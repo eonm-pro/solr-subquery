@@ -39,6 +39,8 @@ jobs:
         with:
           python-version: '3.x'
           architecture: 'x64'
+      - name: Build
+        run: maturin build
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
